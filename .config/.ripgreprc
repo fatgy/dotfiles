@@ -1,0 +1,41 @@
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
+
+# Follow symbolic links
+--follow
+
+# Using glob patterns to include/exclude files or folders
+--glob
+!{node_modules,tmp,history,_site,package-lock.json}
+
+--glob
+!*{.min,.orig,history,debug,cache,public/js}
+
+--glob
+!*{.next,.turbo,out,coverage}
+
+--glob
+!.{git/*,DS_Store,Trashes,asdf,cargo,rustup,npm,gem,pylint}
+
+--glob
+!*.{lock}
+
+--glob
+!*.map
+
+--glob
+!{Library,Music,Screenshots,Movies,Desktop,Downloads,Applicattions,Trash}
+
+# Don't print lines longer than this limit
+--max-columns=150
+--max-columns-preview
+
+--type-add=css:*.{sass,scss}
+--type-add=web:*.{htm,html,css,sass,scss,js,jsx,vue}
+
+# Searches case insensitively
+--smart-case
+
+# Sort by file path
+--sort=path
+
