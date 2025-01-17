@@ -2,3 +2,29 @@
 	name = Shatmongkol Amaraveja
 	email = fatgygy@gmail.com
 
+[core]
+	excludesfile = ~/.gitignore_global
+
+[commit]
+	cleanup = strip
+
+[branch]
+	sort = -committerdate
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	context = 10
+
+[merge]
+	conflictstyle = zdiff3
+
+[log]
+	date = iso
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+

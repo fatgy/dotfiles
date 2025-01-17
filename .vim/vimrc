@@ -1,9 +1,14 @@
+set nocompatible
+
 " https://github.com/romainl/idiomatic-vimrc
 " Enabling filetype support provides filetype-specific indenting,
 " syntax highlighting, omni-completion and other useful settings.
 
-filetype plugin indent on
+filetype plugin on
+filetype indent on
 syntax on
+
+let mapleader = "<Space>"
 
 " `matchit.vim` is built-in so let's enable it!
 " Hit `%` on `if` to jump to `else`
@@ -11,14 +16,43 @@ runtime macros/matchit.vim
 
 " various settings
 set autoindent 			            " Minimal automatic indenting for any filetype.
+set smartindent
 set backspace=indent,eol,start  " Intuitive backspace behavior.
 set hidden 			                " Possibility to have more than one unsaved buffers.
 set hlsearch 			              " Highlight search results
 set incsearch 			            " Incremental search, hit `<CR>` to stop.
+set ignorecase									" Ignore case when searching
+set smartcase										" Ignore case if search pattern is all lowercase, case-sensitive otherwise
 set ruler 			                " Shows the current line number at the bottom-right of the screen
 set wildmenu 			              " Greate command-line completion, use `<Tab>` to move around and `<CR>` to validate
 set number
 set relativenumber
 set modeline
 set modelines=5
+set showcmd											" Show incomplete commands down the bottom
+set showmode										" Show current mode down the bottom
+set guicursor=a:blinkon0				" No cursor blinking
+set visualbell									" No sound on errors
+set autoread										" Reload files when changed on disk
+
+" Turn Off Swap Files
+set noswapfile
+set nobackup
+set nowritebackup
+
+" Auto indent pasted text
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
+
+set linebreak
+
+" Completion
+set wildmode=list:longest
+set wildignore=*.o,*.obj,*~
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=log/**
+set wildignore+=tmp/**
 

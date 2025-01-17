@@ -1,0 +1,180 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" Source your .vimrc
+" source ~/.vimrc
+
+" https://github.com/OptimusCrime/ideavim/blob/master/ideavimrc
+" register leader
+map <Space> <nop>
+let mapleader = "\<Space>"
+
+" After block yank and paste, move cursor to the end of operated text and don't override register
+vnoremap p "_dP`]
+nnoremap p p`]
+
+" Y yank whole line by default
+vnoremap y ygv<Esc>$
+nnoremap Y y$
+
+" have x (removes single character) not go into the default registry
+nnoremap x "_x
+" Make X an operator that removes without placing text in the default registry
+nmap X "_d
+nmap XX "_dd
+vmap X "_d
+vmap x "_d
+
+" don't yank to default register when changing something
+nnoremap c "xc
+xnoremap c "xc
+
+
+xnoremap <Leader>p "_dP
+
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
+nnoremap <Leader>Y "+Y
+
+nnoremap <Leader>d "_d
+vnoremap <Leader>d "_d
+
+" https://github.com/ddrscott/config-nvim/blob/master/init.vim
+" Move through wrapped lines as default, with reverse mappings
+" Warning: swapping k with gk and j with gj
+nnoremap k gk
+nnoremap j gj
+vnoremap k gk
+vnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
+" Warning: Yank without moving cursor! Awesome Sauce!
+"          exit visual mode, my=mark y, last visual selection, y, go to mark
+" Thanks: http://ddrscott.github.io/blog/2016/yank-without-jank/#comment-2643800118
+vnoremap <expr>y 'my"'.v:register.'y`y'
+vnoremap <expr>Y 'my"'.v:register.'Y`y'
+
+" Warning: Marks last yank position.
+nnoremap <expr>y 'my'.v:count.'"'.v:register.'y'
+nnoremap <expr>Y 'my"'.v:register.'y$'
+
+" Keep window centers when going up/down
+nnoremap J mzJ`z
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" continuous shift
+xnoremap < <gv
+xnoremap > >gv
+
+" Search for highlighted text in buffer
+vnoremap // y/<C-R>"<CR>
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+set history=1000
+set showmode
+set showcmd
+
+" Do incremental searching.
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+set gdefault
+
+nnoremap <Esc> <Esc>:nohlsearch<CR>
+inoremap <Esc> <Esc>:nohlsearch<CR>
+
+set number
+set visualbell
+
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" better HJKL
+map H ^
+map L $
+map J }
+map K {
+
+" better escape
+imap jk <Esc>
+imap jj <Esc>
+
+" built-in navigation to navigated items works better
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+" but preserve ideavim defaults
+map g<C-o> <C-o>
+map g<C-i> <C-i>
+
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+set surround
+set commentary
+set argtextobj
+" set easymotion
+set vim-paragraph-motion
+set textobj-indent
+set textobj-entire
+set ReplaceWithRegister
+set exchange
+" set which-key
+" set quickscope
+" set multicursor
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+let g:highlightedyank_highlight_duration = "1000"
+let g:highlightedyank_highlight_color = "rgba(57, 197, 187, 155)"
+
+" https://github.com/gerlacdt/dotfiles/blob/main/ideavim/.ideavimrc
+map <Leader>ff <Action>(GotoFile)
+map <Leader>fr <Action>(RecentFiles)
+map <Leader>fw <Action>(FindInPath)
+map <Leader>fb <Action>(Switcher)
+map <Leader>bc <Action>(CloseAllEditorsButActive)
+map <Leader>lr <Action>(RenameElement)
+map <Leader>lfp <Action>(ReformatWithPrettierAction)
+
+map gr <Action>(FindUsages)
+map gi <Action>(GotoImplementation)
+map gt <Action>(RunClass)
+map [f <Action>(MethodUp)
+map ]f <Action>(MethodDown)
+map [b <Action>(PreviousTab)
+map ]b <Action>(NextTab)
+
+map <Leader>e <Action>(ActivateProjectToolWindow)
+map <Leader>/ <Action>(CommentByLineComment)
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideamarks
+set idearefactormode=normal
+set ideastatusicon=gray
